@@ -1,7 +1,7 @@
 import PostCard from "@/components/PostCard";
 import Image from "next/image";
 
-const fetchPosts = async () => {
+const fetchPosts = async (): Promise<Post[]> => {
   const response = await fetch(
     "https://jsonplaceholder.typicode.com/users/1/posts"
   );
@@ -19,7 +19,9 @@ export default async function Home() {
   return (
     <main>
       <h2>Home</h2>
-      <PostCard title="A great title" author="Mario" />
+      {posts.map((post) => (
+        <PostCard key={post.id} post={post} />
+      ))}
     </main>
   );
 }
